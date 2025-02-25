@@ -1,0 +1,14 @@
+FROM python:3.8-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY train.py .
+COPY predict.py .
+COPY winequality-red.csv .
+COPY model.pkl .
+
+# Expose port
+EXPOSE 5000
+
+# Command to run when container starts
+CMD ["python", "predict.py"]
